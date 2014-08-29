@@ -1,0 +1,209 @@
+
+ library(mini_library){
+  delay_model : table_lookup;
+
+/*******************************************************/
+
+  nom_process : 1;
+  nom_voltage : 1;
+  nom_temperature : 25;
+
+/*******************************************************/
+
+  time_unit : "1ns";
+  voltage_unit : "1V";
+  current_unit : "1mA";
+  pulling_resistance_unit : "1kohm";
+  capacitive_load_unit(1,\
+          pf);
+
+/*******************************************************/
+
+  power_supply(){
+   default_power_rail : vdd;
+   power_rail(vdd, 1);
+   power_rail(vdds, 1);
+  }
+  operating_conditions(nom_1.00V_25C){
+   process : 1;
+   temperature : 25;
+   tree_type : "balanced_tree";
+   voltage : 1;
+   power_rail(vdd, 1);
+   power_rail(vdds, 1);
+  }
+
+/*******************************************************/
+
+  lu_table_template(table_10){
+   index_1(" 0.003, 0.08, 0.16, 0.31 ");
+   index_2(" 0.0014, 0.0044, 0.0088, 0.018, 0.035 ");
+   variable_1 : input_net_transition;
+   variable_2 : total_output_net_capacitance;
+  }
+  cell(inv){
+   area : 1.56;
+   cell_leakage_power : 9.2437e-06;
+   rail_connection(vdd, vdd);
+   rail_connection(vdds, vdds);
+   leakage_power(){
+    power_level : "vdd";
+    value : 9.2437e-06;
+   }
+   leakage_power(){
+    power_level : "vdds";
+    value : 1e-12;
+   }
+   pin(A){
+    capacitance : 0.001056;
+    direction : input;
+    fall_capacitance : 0.001005;
+    input_signal_level : vdd;
+    max_transition : 0.31;
+    rise_capacitance : 0.001107;
+   }
+   pin(Z){
+    capacitance : 0;
+    direction : output;
+    fall_capacitance : 0;
+    function : "!A";
+    max_capacitance : 0.035;
+    output_signal_level : vdd;
+    rise_capacitance : 0;
+    timing(){
+     intrinsic_fall : 0.005232;
+     intrinsic_rise : 0.006767;
+     related_pin : "A";
+     timing_label : "A_Z";
+     timing_sense : negative_unate;
+     cell_fall(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+     cell_rise(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+     fall_transition(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+     rise_transition(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+    }
+   }
+  }
+  cell(nand2){
+   area : 1;
+   cell_leakage_power : 1.0084e-05;
+   rail_connection(vdd, vdd);
+   rail_connection(vdds, vdds);
+   leakage_power(){
+    power_level : "vdd";
+    value : 1.0084e-05;
+   }
+   leakage_power(){
+    power_level : "vdds";
+    value : 2.82555e-11;
+   }
+   pin(A){
+    capacitance : 0.001;
+    direction : input;
+    fall_capacitance : 0.001;
+    input_signal_level : vdd;
+    max_transition : 0.31;
+    rise_capacitance : 0.001;
+   }
+   pin(B){
+    capacitance : 0.001;
+    direction : input;
+    fall_capacitance : 0.001;
+    input_signal_level : vdd;
+    max_transition : 0.31;
+    rise_capacitance : 0.001;
+   }
+   pin(Z){
+    capacitance : 0;
+    direction : output;
+    fall_capacitance : 0;
+    function : "!A+!B";
+    max_capacitance : 0.035;
+    output_signal_level : vdd;
+    rise_capacitance : 0;
+    timing(){
+     drc_charcond : "0_1 B 1_0 B";
+     intrinsic_fall : 0.009187;
+     intrinsic_rise : 0.008663;
+     related_pin : "A";
+     timing_label : "A_Z";
+     timing_sense : negative_unate;
+     cell_fall(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+     cell_rise(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+     fall_transition(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+     rise_transition(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+    }
+    timing(){
+     drc_charcond : "0_1 A 1_0 A";
+     intrinsic_fall : 0.008345;
+     intrinsic_rise : 0.00793;
+     related_pin : "B";
+     timing_label : "B_Z";
+     timing_sense : negative_unate;
+     cell_fall(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+     cell_rise(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+     fall_transition(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+     rise_transition(table_10){
+      values("0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01",\
+          "0.01, 0.01, 0.01, 0.01, 0.01");
+     }
+    }
+   }
+  }
+ }

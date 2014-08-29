@@ -1,0 +1,25 @@
+[*]
+[*] GTKWave Analyzer v3.3.34 (w)1999-2012 BSI
+[*] Tue Jul 23 18:53:20 2013
+[*]
+[dumpfile] "/home/fredericobutzke/Área de trabalho/ghdl_kogge_stone/tb_kogge_stone.vcd"
+[dumpfile_mtime] "Tue Jul 23 18:52:56 2013"
+[dumpfile_size] 257634
+[savefile] "/home/fredericobutzke/Área de trabalho/ghdl_kogge_stone/wave.sav"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-23.394852 880000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 223
+[signals_width] 135
+[sst_expanded] 1
+[sst_vpaned_height] 160
+@22
+kg.a[15:0]
+kg.b[15:0]
+@28
+kg.carry_in
+kg.carry_out
+kg.sum[15:0]
+[pattern_trace] 1
+[pattern_trace] 0
