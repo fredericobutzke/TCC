@@ -6,13 +6,13 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 	
 entity kogge_stone is
     Generic ( 
-	nbits := 32
+		nbits := 32
     );
-    Port ( a : in STD_LOGIC_VECTOR(nbits-1 downto 0);
-           b : in STD_LOGIC_VECTOR(nbits-1 downto 0);
-	   carry_in : in STD_LOGIC;
-           sum : out STD_LOGIC_VECTOR(nbits-1 downto 0);
-	   carry_out : out STD_LOGIC
+    Port ( 	a : in STD_LOGIC_VECTOR(nbits-1 downto 0);
+           	b : in STD_LOGIC_VECTOR(nbits-1 downto 0);
+	   		carry_in : in STD_LOGIC;
+           	sum : out STD_LOGIC_VECTOR(nbits-1 downto 0);
+	   		carry_out : out STD_LOGIC
 	);
 end kogge_stone;
 
